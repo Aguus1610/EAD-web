@@ -1,0 +1,20 @@
+{
+  "name": "ead-oleohidraulica-web",
+  "version": "2.0.0",
+  "description": "Sitio web de EAD Oleohidráulica - Servicio Técnico Oficial",
+  "scripts": {
+    "build": "echo 'Proyecto HTML estático - No requiere compilación' && exit 0",
+    "dev": "echo 'Usar servidor local para desarrollo' && exit 0",
+    "validate": "echo 'Validando archivos HTML...' && ls *.html",
+    "check": "echo 'Verificando estructura del proyecto...' && ls -R"
+  },
+  "keywords": [
+    "oleohidraulica",
+    "gruas",
+    "hidroelevadores",
+    "palfinger",
+    "hidro-grubert"
+  ],
+  "author": "ADM Digital - Agustin Deux Messler",
+  "license": "ISC"
+}

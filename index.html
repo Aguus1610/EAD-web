@@ -7,20 +7,30 @@
   <title>EAD Oleohidráulica | Soluciones Hidráulicas Integrales</title>
 
   <!-- SEO & Social -->
-  <meta name="description" content="Reparación y mantenimiento de grúas articuladas e hidroelevadores. 25 años atendiendo empresas de servicios públicos, corralones y particulares. Servicio 24/7." />
-  <meta property="og:title" content="Soluciones Hidráulicas Integrales" />
-  <meta property="og:description" content="Expertos en hidráulica para maquinaria pesada, agrícola e industrial." />
+  <meta name="description" content="Reparación y mantenimiento de grúas articuladas e hidroelevadores. 25 años atendiendo empresas de servicios públicos, corralones y particulares. Servicio 24/7. Servicio técnico oficial Palfinger e Hidro-Grubert." />
+  <meta name="keywords" content="reparación grúas, hidroelevadores, servicio técnico Palfinger, Hidro-Grubert, oleohidráulica, mantenimiento grúas, La Pampa, Colonia Baron" />
+  <meta name="author" content="EAD Oleohidráulica" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="EAD Oleohidráulica | Servicio Técnico Oficial Palfinger e Hidro-Grubert" />
+  <meta property="og:description" content="25 años especializados en reparación y mantenimiento de grúas e hidroelevadores. Servicio técnico oficial. Atención 24/7 para empresas de servicios públicos." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://tudominio.com" />
-  <meta property="og:image" content="EAD lateral 5.png" />
+  <meta property="og:url" content="https://eadoleohidraulica.com.ar" />
+  <meta property="og:image" content="https://eadoleohidraulica.com.ar/EAD%20lateral%205.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:locale" content="es_AR" />
   <meta property="og:site_name" content="EAD Oleohidráulica" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="EAD Oleohidráulica | Servicio Técnico Oficial" />
+  <meta name="twitter:description" content="25 años especializados en reparación y mantenimiento de grúas e hidroelevadores." />
+  <link rel="canonical" href="https://eadoleohidraulica.com.ar/" />
 
   <link rel="icon" href="EAD lateral 5.png" type="image/png" />
-  <link rel="apple-touch-icon" href="EAD lateral 5.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="EAD lateral 5.png" />
+  <meta name="theme-color" content="#001122" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="animations.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
@@ -32,11 +42,11 @@
         <img src="EAD lateral 5.png" alt="EAD Oleohidráulica - Soluciones hidráulicas profesionales" class="logo-img" loading="eager" />
       </a>
 
-      <button class="nav-toggle" aria-label="Abrir menú">
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-navigation">
         <span></span><span></span><span></span>
       </button>
 
-      <nav class="site-nav" aria-label="Navegación principal">
+      <nav class="site-nav" id="main-navigation" aria-label="Navegación principal">
         <ul>
           <li><a href="index.html" class="active">Inicio</a></li>
           <li><a href="productos.html">Productos</a></li>
@@ -49,14 +59,18 @@
   </header>
 
   <!-- ===== Hero ===== -->
-  <section class="hero">
+  <section class="hero" role="banner" aria-label="Sección principal">
     <div class="hero-container">
       <div class="hero-content">
-        <h1>Oleohidraulica general</h1>
-        <h2>Servicio Tecnico Oficial:</h2>
-        <h2>- Hidro-Grubert</h2>
-        <h2>- Palfinger</h2>
-        <h2>- Hidraulica Movil/ING</h2>
+        <h1>Oleohidráulica General</h1>
+        <div class="hero-subtitle">
+          <h2>Servicio Técnico Oficial:</h2>
+          <ul class="official-services">
+            <li>Hidro-Grubert</li>
+            <li>Palfinger</li>
+            <li>Hidráulica Móvil/ING</li>
+          </ul>
+        </div>
         <p>Desde hace 25&nbsp;años somos el taller de confianza de empresas cooperativas, municipios, corralones y particulares. Reparación, mantenimiento y repuestos para todo tipo de maquinaria: rurales, industriales, pesadas, etc.</p>
         <a href="contacto.html" class="btn btn--primary">Urgencias 24/7 → Tu grúa operativa hoy mismo</a>
       </div>
@@ -69,10 +83,10 @@
               <img src="11 - PKK 26000.webp" alt="Grúa PKK 26000 - Servicio técnico especializado" />
             </div>
             <div class="carousel-slide">
-              <img src="ing.webp" />
+              <img src="ing.webp" alt="Hidráulica Móvil ING - Distribuidor autorizado" loading="lazy" />
             </div>
             <div class="carousel-slide">
-              <img src="hidraulica movil.png" />
+              <img src="hidraulica movil.png" alt="Hidráulica Móvil - Productos y servicios" loading="lazy" />
             </div>
 
             <div class="carousel-indicators">
@@ -87,7 +101,7 @@
   </section>
 
   <!-- ===== Destacados ===== -->
-  <section class="features container">
+  <section class="features container" aria-label="Servicios destacados">
     <article class="feature">
       <div class="feature-image">
         <div class="feature-image-placeholder">
@@ -124,7 +138,7 @@
   </section>
 
   <!-- Sección de Empresas Representadas -->
-  <section class="partners-section">
+  <section class="partners-section" aria-label="Empresas que representamos">
     <div class="container">
       <h2>Empresas que representamos</h2>
       <p>Servicio Técnico Oficial y venta de repuestos originales</p>
@@ -168,7 +182,7 @@
   </section>
 
   <!-- ===== Footer ===== -->
-  <footer class="site-footer">
+  <footer class="site-footer" role="contentinfo">
     <div class="footer-content">
       <p>&copy; <span id="year"></span> EAD Oleohidraulica — Todos los derechos reservados.</p>
       <p class="developer-credit">Desarrollado por <span class="developer-name">ADM Digital</span> | Agustin Deux Messler</p>
@@ -177,5 +191,7 @@
 
   <script src="main.js" defer></script>
   <script src="carousel.js" defer></script>
+  <script src="scroll-animations.js" defer></script>
+  <script src="performance.js" defer></script>
 </body>
 </html>

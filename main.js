@@ -10,13 +10,14 @@ function initNav() {
     navToggle.addEventListener("click", (e) => {
       e.stopPropagation();
       const willOpen = !nav.classList.contains("open");
-      
+
       nav.classList.toggle("open");
       navToggle.classList.toggle("open");
-      
+      navToggle.setAttribute("aria-expanded", willOpen ? "true" : "false");
+
       // Evita scroll del body cuando el menú está abierto
       document.body.style.overflow = willOpen ? "hidden" : "";
-      
+
       if (!willOpen) {
         // cerramos también cualquier submenú
         document.querySelectorAll(".has-submenu.open").forEach((li) => {

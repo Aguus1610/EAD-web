@@ -428,9 +428,15 @@ h6 {
     grid-template-columns: 1fr;
     text-align: center;
   }
-  
+
   .hero-content {
     text-align: center;
+  }
+
+  .official-services li {
+    text-align: left;
+    display: inline-block;
+    width: 100%;
   }
   
   .hero-image {
@@ -467,9 +473,40 @@ h6 {
 .hero h1 {
   font-size: clamp(var(--font-size-2xl), 5vw, var(--font-size-5xl));
   font-weight: 700;
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
   position: relative;
   z-index: 1;
+  line-height: 1.2;
+}
+
+.hero-subtitle h2 {
+  font-size: clamp(var(--font-size-lg), 3vw, var(--font-size-2xl));
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--clr-accent);
+}
+
+.official-services {
+  list-style: none;
+  padding: 0;
+  margin: var(--spacing-md) 0;
+}
+
+.official-services li {
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  padding-left: var(--spacing-lg);
+  position: relative;
+  margin-bottom: var(--spacing-xs);
+}
+
+.official-services li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--clr-accent);
+  font-weight: bold;
+  font-size: var(--font-size-xl);
 }
 
 .hero p {
@@ -503,11 +540,21 @@ h6 {
   border-color: var(--clr-accent);
 }
 
-.btn--primary:hover {
+.btn--primary:hover,
+.btn--primary:focus {
   background: var(--clr-accent-dark);
   border-color: var(--clr-accent-dark);
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
+}
+
+.btn--primary:focus {
+  outline: 2px solid var(--clr-accent);
+  outline-offset: 2px;
+}
+
+.btn--primary:active {
+  transform: translateY(0);
 }
 
 /* ===== Features Grid ===== */
@@ -534,6 +581,11 @@ h6 {
   transform: translateY(-4px);
   box-shadow: var(--shadow-xl);
   border-color: var(--clr-accent);
+}
+
+.feature:focus-within {
+  border-color: var(--clr-accent);
+  box-shadow: var(--shadow-lg);
 }
 
 .feature-image {
@@ -1154,6 +1206,11 @@ h6 {
   .features {
     margin-top: var(--spacing-2xl);
     padding: 0 var(--spacing-md);
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: var(--font-size-3xl);
   }
   
   .container {
