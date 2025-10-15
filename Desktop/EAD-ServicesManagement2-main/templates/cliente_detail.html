@@ -1,0 +1,726 @@
+{% extends "base.html" %}
+
+{% block title %}{{ cliente.nombre }} - Clientes - EAD Oleohidráulica{% endblock %}
+
+{% block breadcrumb %}
+<nav aria-label="breadcrumb" class="mt-2">
+    <div class="container-fluid">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/"><i class="bi bi-house"></i> Inicio</a></li>
+            <li class="breadcrumb-item"><a href="/clientes"><i class="bi bi-people"></i> Clientes</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ cliente.nombre }}</li>
+        </ol>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="animate-slide">
+    <!-- Tarjeta de información del cliente -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start flex-wrap">
+                        <div>
+                            <h3 class="mb-2">
+                                <i class="bi bi-person-circle"></i> {{ cliente.nombre }}
+                            </h3>
+                            <div class="text-muted">
+                                <p class="mb-1">
+                                    <i class="bi bi-tag"></i> <strong>Tipo:</strong> {{ cliente.tipo_cliente }}
+                                    {% if cliente.activo %}
+                                    <span class="badge bg-success ms-2">Activo</span>
+                                    {% else %}
+                                    <span class="badge bg-danger ms-2">Inactivo</span>
+                                    {% endif %}
+                                </p>
+                                <p class="mb-1"><i class="bi bi-calendar"></i> <strong>Registrado:</strong> {{ cliente.fecha_registro.strftime('%d/%m/%Y') }}</p>
+                                {% if cliente.telefono %}
+                                <p class="mb-1"><i class="bi bi-telephone"></i> <strong>Teléfono:</strong> {{ cliente.telefono }}</p>
+                                {% endif %}
+                                {% if cliente.email %}
+                                <p class="mb-1"><i class="bi bi-envelope"></i> <strong>Email:</strong> {{ cliente.email }}</p>
+                                {% endif %}
+                                {% if cliente.direccion %}
+                                <p class="mb-1"><i class="bi bi-geo-alt"></i> <strong>Dirección:</strong> {{ cliente.direccion }}{% if cliente.ciudad %}, {{ cliente.ciudad }}{% endif %}{% if cliente.codigo_postal %} ({{ cliente.codigo_postal }}){% endif %}</p>
+                                {% endif %}
+                                {% if cliente.cuit_dni %}
+                                <p class="mb-1"><i class="bi bi-card-text"></i> <strong>CUIT/DNI:</strong> {{ cliente.cuit_dni }}</p>
+                                {% endif %}
+                                {% if cliente.notas %}
+                                <p class="mb-0"><i class="bi bi-chat-text"></i> <strong>Notas:</strong> {{ cliente.notas }}</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="mt-3 mt-md-0">
+                            <a href="/cliente/{{ cliente.id }}/editar" class="btn btn-outline-primary">
+                                <i class="bi bi-pencil"></i> Editar
+                            </a>
+                            {% if cliente.activo %}
+                            <button class="btn btn-outline-danger" onclick="confirmarDesactivacion()">
+                                <i class="bi bi-person-x"></i> Desactivar
+                            </button>
+                            {% endif %}
+                            {% if cliente.telefono %}
+                            <button class="btn btn-outline-success" onclick="llamarCliente()">
+                                <i class="bi bi-telephone"></i> Llamar
+                            </button>
+                            {% endif %}
+                            {% if cliente.email %}
+                            <button class="btn btn-outline-info" onclick="emailCliente()">
+                                <i class="bi bi-envelope"></i> Email
+                            </button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Estadísticas principales -->
+    <div class="row g-3 mb-4">
+        <div class="col-6 col-md-3">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="bi bi-truck fs-2 text-primary mb-2"></i>
+                    <h4 class="mb-0">{{ total_equipos }}</h4>
+                    <small class="text-muted">Equipos</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-3">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="bi bi-wrench fs-2 text-success mb-2"></i>
+                    <h4 class="mb-0">{{ total_trabajos }}</h4>
+                    <small class="text-muted">Trabajos</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="bi bi-currency-dollar fs-2 text-warning mb-2"></i>
+                    <h4 class="mb-0">${{ "{:,.0f}".format(total_gastado) }}</h4>
+                    <small class="text-muted">Total Invertido</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Información adicional del cliente -->
+    {% if cliente.direccion or cliente.cuit_dni or cliente.notas %}
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-info-circle text-info"></i> Información Adicional
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% if cliente.direccion %}
+                        <div class="col-12 col-md-6 mb-3">
+                            <h6><i class="bi bi-house"></i> Dirección</h6>
+                            <p class="text-muted mb-0">{{ cliente.direccion }}</p>
+                            {% if cliente.codigo_postal %}
+                            <small class="text-muted">CP: {{ cliente.codigo_postal }}</small>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                        
+                        {% if cliente.cuit_dni %}
+                        <div class="col-12 col-md-6 mb-3">
+                            <h6><i class="bi bi-card-text"></i> CUIT/DNI</h6>
+                            <p class="text-muted mb-0">{{ cliente.cuit_dni }}</p>
+                        </div>
+                        {% endif %}
+                        
+                        {% if cliente.notas %}
+                        <div class="col-12 mb-3">
+                            <h6><i class="bi bi-journal-text"></i> Notas</h6>
+                            <p class="text-muted mb-0">{{ cliente.notas }}</p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="row">
+        <!-- Gráfico de gastos mensuales -->
+        <div class="col-12 col-lg-8 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-graph-up text-success"></i> Gastos por Mes (Últimos 6 meses)
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div style="position: relative; height: 300px; width: 100%;">
+                        <canvas id="gastosChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Equipos con más gastos y próximos servicios -->
+        <div class="col-12 col-lg-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-truck text-primary"></i> Equipos por Gasto
+                    </h5>
+                </div>
+                <div class="card-body">
+                    {% if equipos_gastos %}
+                    <div class="list-group list-group-flush">
+                        {% for item in equipos_gastos[:5] %}
+                        <div class="list-group-item px-0 py-2">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-1">{{ item.equipo.marca }} {{ item.equipo.modelo }}</h6>
+                                    <small class="text-muted">{{ item.total_trabajos }} trabajos</small>
+                                </div>
+                                <div class="text-end">
+                                    <strong class="text-success">${{ "{:,.0f}".format(item.total_gastado) }}</strong>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <p class="text-muted text-center">No hay datos de gastos</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Próximos servicios -->
+    {% if proximos_servicios %}
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-calendar-check text-warning"></i> Próximos Servicios
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Equipo</th>
+                                    <th class="text-center">Fecha Programada</th>
+                                    <th class="text-center">Días Restantes</th>
+                                    <th class="text-center">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for servicio in proximos_servicios %}
+                                <tr>
+                                    <td>
+                                        <strong>{{ servicio.equipo.marca }} {{ servicio.equipo.modelo }}</strong>
+                                        <small class="text-muted d-block">{{ servicio.equipo.n_serie }}</small>
+                                    </td>
+                                    <td class="text-center">
+                                        {{ servicio.fecha.strftime('%d/%m/%Y') }}
+                                    </td>
+                                    <td class="text-center">
+                                        <span class="badge bg-{{ servicio.status }}">
+                                            {% if servicio.days_left < 0 %}
+                                                {{ servicio.days_left|abs }} días vencido
+                                            {% elif servicio.days_left == 0 %}
+                                                Hoy
+                                            {% else %}
+                                                {{ servicio.days_left }} días
+                                            {% endif %}
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        {% if servicio.days_left < 0 %}
+                                        <i class="bi bi-exclamation-triangle text-danger" title="Vencido"></i>
+                                        {% elif servicio.days_left < 7 %}
+                                        <i class="bi bi-clock text-warning" title="Próximo"></i>
+                                        {% else %}
+                                        <i class="bi bi-check-circle text-success" title="A tiempo"></i>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Equipos del cliente -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="bi bi-truck text-primary"></i> Equipos del Cliente
+                    </h5>
+                    <div class="btn-group">
+                        <button class="btn btn-sm btn-success" onclick="mostrarModalAsignarEquipos()">
+                            <i class="bi bi-plus-circle"></i> Asignar Equipos
+                        </button>
+                        <a href="/equipos?search={{ cliente_nombre|urlencode }}" class="btn btn-sm btn-outline-primary">
+                            Ver todos <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% if equipos %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Equipo</th>
+                                    <th>Año</th>
+                                    <th>N° Serie</th>
+                                    <th class="text-center">Trabajos</th>
+                                    <th class="text-end">Total Gastado</th>
+                                    <th class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for equipo in equipos %}
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-truck me-2 text-primary"></i>
+                                            <div>
+                                                <strong>{{ equipo.marca }} {{ equipo.modelo }}</strong>
+                                                {% if equipo.dominio %}
+                                                <small class="text-muted d-block">{{ equipo.dominio }}</small>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-light text-dark">{{ equipo.anio }}</span>
+                                    </td>
+                                    <td>
+                                        <code class="text-muted">{{ equipo.n_serie }}</code>
+                                    </td>
+                                    <td class="text-center">
+                                        {% set job_count = equipos_gastos|selectattr('equipo.id', 'equalto', equipo.id)|map(attribute='total_trabajos')|first or 0 %}
+                                        <span class="badge bg-secondary">{{ job_count }}</span>
+                                    </td>
+                                    <td class="text-end">
+                                        {% set total_gastado_equipo = equipos_gastos|selectattr('equipo.id', 'equalto', equipo.id)|map(attribute='total_gastado')|first or 0 %}
+                                        <strong class="text-success">${{ "{:,.0f}".format(total_gastado_equipo) }}</strong>
+                                    </td>
+                                    <td class="text-center">
+                                        <div class="btn-group btn-group-sm">
+                                            <a href="/equipo/{{ equipo.id }}" class="btn btn-outline-primary" title="Ver detalles">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+                                            <a href="/trabajo/nuevo/{{ equipo.id }}" class="btn btn-outline-success" title="Nuevo trabajo">
+                                                <i class="bi bi-plus"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <p class="text-muted text-center">No hay equipos registrados</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Trabajos recientes -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="bi bi-wrench text-success"></i> Trabajos Recientes
+                    </h5>
+                    <a href="/trabajos?search={{ cliente_nombre|urlencode }}" class="btn btn-sm btn-outline-success">
+                        Ver todos <i class="bi bi-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="card-body">
+                    {% if trabajos_recientes %}
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Equipo</th>
+                                    <th>Descripción</th>
+                                    <th class="text-end">Presupuesto</th>
+                                    <th class="text-center">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for trabajo in trabajos_recientes %}
+                                <tr>
+                                    <td>
+                                        <span class="badge bg-info">{{ trabajo.date_done.strftime('%d/%m/%Y') }}</span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <i class="bi bi-truck me-2 text-primary"></i>
+                                            <small>{{ trabajo.equipment.marca }} {{ trabajo.equipment.modelo }}</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="text-truncate" style="max-width: 300px;" title="{{ trabajo.description }}">
+                                            {{ trabajo.description }}
+                                        </div>
+                                    </td>
+                                    <td class="text-end">
+                                        <strong class="text-success">${{ "{:,.0f}".format(trabajo.budget) }}</strong>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="/equipo/{{ trabajo.equipment.id }}" class="btn btn-sm btn-outline-primary" title="Ver equipo">
+                                            <i class="bi bi-truck"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    {% else %}
+                    <p class="text-muted text-center">No hay trabajos registrados</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para asignar equipos -->
+<div class="modal fade" id="modalAsignarEquipos" tabindex="-1" aria-labelledby="modalAsignarEquiposLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalAsignarEquiposLabel">
+                    <i class="bi bi-truck"></i> Asignar Equipos a {{ cliente.nombre }}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="buscarEquipos" class="form-label">Buscar equipos sin asignar:</label>
+                    <input type="text" class="form-control" id="buscarEquipos" placeholder="Buscar por marca, modelo, serie...">
+                </div>
+                
+                <div id="listaEquipos" class="list-group" style="max-height: 400px; overflow-y: auto;">
+                    <!-- Los equipos se cargarán aquí dinámicamente -->
+                </div>
+                
+                <div id="sinEquipos" class="text-center text-muted py-4" style="display: none;">
+                    <i class="bi bi-search fs-1"></i>
+                    <p class="mt-2">No se encontraron equipos sin asignar</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="asignarEquiposSeleccionados" disabled>
+                    <i class="bi bi-check-circle"></i> Asignar Equipos Seleccionados
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .animate-slide {
+        animation: slideIn 0.4s ease-out;
+    }
+    
+    @keyframes slideIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        transition: all 0.3s ease;
+    }
+    
+    .list-group-item {
+        border: none;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    
+    .list-group-item:last-child {
+        border-bottom: none;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Gráfico de gastos mensuales
+    const ctx = document.getElementById('gastosChart').getContext('2d');
+    const gastosData = {{ gastos_mensuales | tojson }};
+    
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: gastosData.map(item => item.month),
+            datasets: [{
+                label: 'Gastos ($)',
+                data: gastosData.map(item => item.total),
+                borderColor: 'rgb(75, 192, 192)',
+                backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                tension: 0.4,
+                fill: true,
+                borderWidth: 3
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            interaction: {
+                intersect: false,
+                mode: 'index'
+            },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    titleColor: '#fff',
+                    bodyColor: '#fff',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    callbacks: {
+                        label: function(context) {
+                            return 'Gastos: $' + context.parsed.y.toLocaleString();
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        callback: function(value) {
+                            return '$' + value.toLocaleString();
+                        }
+                    }
+                }
+            },
+            elements: {
+                point: {
+                    radius: 5,
+                    hoverRadius: 8,
+                    backgroundColor: 'rgb(75, 192, 192)',
+                    borderColor: '#fff',
+                    borderWidth: 2
+                }
+            }
+        }
+    });
+});
+
+// Función para confirmar desactivación del cliente
+function confirmarDesactivacion() {
+    if (confirm('¿Está seguro de que desea desactivar este cliente?\n\nEl cliente no aparecerá en las búsquedas pero se mantendrán todos sus datos.')) {
+        // Crear formulario para enviar POST
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/cliente/{{ cliente.id }}/eliminar';
+        
+        // Agregar token CSRF si es necesario
+        const csrfToken = document.querySelector('meta[name="csrf-token"]');
+        if (csrfToken) {
+            const csrfInput = document.createElement('input');
+            csrfInput.type = 'hidden';
+            csrfInput.name = 'csrf_token';
+            csrfInput.value = csrfToken.getAttribute('content');
+            form.appendChild(csrfInput);
+        }
+        
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
+
+// Funciones de utilidad para acciones rápidas
+function llamarCliente() {
+    {% if cliente.telefono %}
+    window.open('tel:{{ cliente.telefono }}', '_self');
+    {% else %}
+    alert('Este cliente no tiene teléfono registrado.');
+    {% endif %}
+}
+
+function emailCliente() {
+    {% if cliente.email %}
+    window.open('mailto:{{ cliente.email }}', '_self');
+    {% else %}
+    alert('Este cliente no tiene email registrado.');
+    {% endif %}
+}
+
+// Agregar tooltips a los elementos
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar tooltips de Bootstrap
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+});
+
+// Variables globales para el modal de asignación
+let equiposSinAsignar = [];
+let equiposSeleccionados = new Set();
+
+// Función para mostrar el modal de asignación de equipos
+function mostrarModalAsignarEquipos() {
+    const modal = new bootstrap.Modal(document.getElementById('modalAsignarEquipos'));
+    cargarEquiposSinAsignar();
+    modal.show();
+}
+
+// Función para cargar equipos sin asignar
+async function cargarEquiposSinAsignar() {
+    try {
+        const response = await fetch('/api/equipos/sin-asignar');
+        equiposSinAsignar = await response.json();
+        mostrarEquiposEnModal(equiposSinAsignar);
+    } catch (error) {
+        console.error('Error cargando equipos:', error);
+        document.getElementById('listaEquipos').innerHTML = '<div class="alert alert-danger">Error cargando equipos</div>';
+    }
+}
+
+// Función para mostrar equipos en el modal
+function mostrarEquiposEnModal(equipos) {
+    const listaEquipos = document.getElementById('listaEquipos');
+    const sinEquipos = document.getElementById('sinEquipos');
+    
+    if (equipos.length === 0) {
+        listaEquipos.style.display = 'none';
+        sinEquipos.style.display = 'block';
+        return;
+    }
+    
+    listaEquipos.style.display = 'block';
+    sinEquipos.style.display = 'none';
+    
+    listaEquipos.innerHTML = equipos.map(equipo => `
+        <div class="list-group-item">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="${equipo.id}" id="equipo_${equipo.id}" onchange="toggleEquipoSeleccionado(${equipo.id})">
+                <label class="form-check-label w-100" for="equipo_${equipo.id}">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <strong>${equipo.marca} ${equipo.modelo}</strong>
+                            <small class="text-muted d-block">Año: ${equipo.anio} | Serie: ${equipo.n_serie}</small>
+                            ${equipo.propietario ? `<small class="text-info d-block">Propietario: ${equipo.propietario}</small>` : ''}
+                        </div>
+                        <div class="text-end">
+                            <span class="badge bg-secondary">Sin asignar</span>
+                        </div>
+                    </div>
+                </label>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Función para toggle de selección de equipos
+function toggleEquipoSeleccionado(equipoId) {
+    if (equiposSeleccionados.has(equipoId)) {
+        equiposSeleccionados.delete(equipoId);
+    } else {
+        equiposSeleccionados.add(equipoId);
+    }
+    
+    // Actualizar estado del botón
+    const botonAsignar = document.getElementById('asignarEquiposSeleccionados');
+    botonAsignar.disabled = equiposSeleccionados.size === 0;
+    botonAsignar.textContent = equiposSeleccionados.size > 0 ? 
+        `Asignar ${equiposSeleccionados.size} Equipo${equiposSeleccionados.size > 1 ? 's' : ''}` : 
+        'Asignar Equipos Seleccionados';
+}
+
+// Función para buscar equipos
+document.getElementById('buscarEquipos').addEventListener('input', function() {
+    const busqueda = this.value.toLowerCase();
+    const equiposFiltrados = equiposSinAsignar.filter(equipo => 
+        equipo.marca.toLowerCase().includes(busqueda) ||
+        equipo.modelo.toLowerCase().includes(busqueda) ||
+        equipo.n_serie.toLowerCase().includes(busqueda) ||
+        (equipo.propietario && equipo.propietario.toLowerCase().includes(busqueda))
+    );
+    mostrarEquiposEnModal(equiposFiltrados);
+});
+
+// Función para asignar equipos seleccionados
+document.getElementById('asignarEquiposSeleccionados').addEventListener('click', async function() {
+    if (equiposSeleccionados.size === 0) return;
+    
+    const boton = this;
+    const textoOriginal = boton.innerHTML;
+    boton.disabled = true;
+    boton.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Asignando...';
+    
+    try {
+        const response = await fetch(`/api/cliente/{{ cliente.id }}/asignar-equipos`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                equipos_ids: Array.from(equiposSeleccionados)
+            })
+        });
+        
+        if (response.ok) {
+            const result = await response.json();
+            alert(`Se asignaron ${result.asignados} equipos exitosamente.`);
+            
+            // Cerrar modal y recargar página
+            bootstrap.Modal.getInstance(document.getElementById('modalAsignarEquipos')).hide();
+            location.reload();
+        } else {
+            const error = await response.json();
+            alert(`Error: ${error.error || 'Error desconocido'}`);
+        }
+    } catch (error) {
+        console.error('Error asignando equipos:', error);
+        alert('Error asignando equipos. Inténtelo nuevamente.');
+    } finally {
+        boton.disabled = false;
+        boton.innerHTML = textoOriginal;
+    }
+});
+</script>
+{% endblock %}
