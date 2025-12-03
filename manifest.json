@@ -1,0 +1,45 @@
+{
+  "name": "EAD Oleohidráulica - Servicio Técnico Oficial",
+  "short_name": "EAD Oleohidráulica",
+  "description": "Servicio técnico oficial de grúas articuladas e hidroelevadores. Palfinger e Hidro-Grubert. Urgencias 24/7.",
+  "start_url": "/EAD-web/",
+  "display": "standalone",
+  "background_color": "#001122",
+  "theme_color": "#001122",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "Logo simple Taller (snf blanco).png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "Logo simple Taller (snf blanco).png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "utilities"],
+  "lang": "es-AR",
+  "dir": "ltr",
+  "scope": "/EAD-web/",
+  "shortcuts": [
+    {
+      "name": "Contacto",
+      "short_name": "Contacto",
+      "description": "Contactar por WhatsApp o teléfono",
+      "url": "/EAD-web/contacto.html",
+      "icons": [{ "src": "Logo simple Taller (snf blanco).png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Servicios",
+      "short_name": "Servicios",
+      "description": "Ver nuestros servicios técnicos",
+      "url": "/EAD-web/servicios.html",
+      "icons": [{ "src": "Logo simple Taller (snf blanco).png", "sizes": "96x96" }]
+    }
+  ]
+}
+
