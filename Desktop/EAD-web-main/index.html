@@ -21,18 +21,22 @@
   <link rel="icon" href="Logo simple Taller (snf blanco).png" type="image/png" />
   <link rel="apple-touch-icon" href="Logo simple Taller (snf blanco).png" />
   <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 </head>
 <body>
-  <!-- ===== Header / Navbar ===== -->
-    <header class="site-header">
+  <!-- ===== Header / Navbar Premium ===== -->
+  <div class="nav-overlay"></div>
+  <header class="site-header">
     <div class="container">
       <a href="index.html" class="logo">
-        <img src="Logo simple Taller (snf blanco).png" alt="EAD Oleohidráulica - Soluciones hidráulicas profesionales" class="logo-img" loading="eager" />
+        <div class="logo-container">
+          <img src="Logo simple Taller (snf blanco).png" alt="EAD Oleohidráulica - Soluciones hidráulicas profesionales" class="logo-img" loading="eager" />
+        </div>
       </a>
 
-      <button class="nav-toggle" aria-label="Abrir menú">
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
 
@@ -169,6 +173,11 @@
 
   <!-- ===== Footer ===== -->
   <footer class="site-footer">
+    <div class="footer-logo">
+      <a href="index.html">
+        <img src="Logo simple Taller (snf blanco).png" alt="EAD Oleohidráulica" class="footer-logo-img" />
+      </a>
+    </div>
     <div class="footer-content">
       <p>&copy; <span id="year"></span> EAD Oleohidraulica — Todos los derechos reservados.</p>
       <p class="developer-credit">Desarrollado por <span class="developer-name">ADM Digital</span> | Agustin Deux Messler</p>
