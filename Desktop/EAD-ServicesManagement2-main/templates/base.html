@@ -507,6 +507,93 @@
                 gap: 0.3rem;
             }
         }
+
+        /* Footer ampliado para logos */
+        .site-footer {
+            background-color: var(--light-gray);
+            border-top: 3px solid var(--ead-blue);
+            margin-top: 3rem;
+        }
+
+        .footer-branding h6 {
+            font-weight: 700;
+            color: var(--ead-blue);
+        }
+
+        .footer-branding span {
+            color: var(--ead-red);
+            font-weight: 600;
+            letter-spacing: 0.03em;
+        }
+
+        .footer-logos-label {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .footer-logos-label i {
+            color: var(--ead-light-blue);
+        }
+
+        .footer-logos-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer-logo-slot {
+            flex: 0 1 140px;
+            min-height: 80px;
+            padding: 0.75rem 1rem;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 0.85rem;
+            border: 1px dashed rgba(26, 58, 82, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .footer-logo-slot:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            border-color: rgba(26, 58, 82, 0.5);
+        }
+
+        .footer-logo-slot img {
+            max-height: 50px;
+            width: 100%;
+            object-fit: contain;
+            filter: grayscale(0.2) opacity(0.9);
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .footer-logo-slot:hover img {
+            transform: scale(1.05);
+            filter: none;
+        }
+
+        .footer-logo-slot.placeholder {
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            border-style: dotted;
+        }
+
+        @media (max-width: 576px) {
+            .footer-logo-slot {
+                flex: 0 1 calc(50% - 0.75rem);
+            }
+        }
     </style>
     {% block extra_css %}{% endblock %}
 </head>
@@ -749,15 +836,42 @@
     </div>
     
     <!-- Footer -->
-    <footer class="text-center py-3 mt-5" style="background-color: var(--light-gray); border-top: 3px solid var(--ead-blue);">
-        <div class="container">
-            <div>
-                <i class="bi bi-gear-fill" style="color: var(--ead-blue);"></i>
-                <strong style="color: var(--ead-blue);">EAD</strong> 
-                <span style="color: var(--ead-red);">Oleohidráulica</span>
-                <span class="text-muted">© 2025</span>
+    <footer class="site-footer text-center text-lg-start">
+        <div class="container py-4">
+            <div class="row gy-4 align-items-center">
+                <div class="col-lg-4 footer-branding">
+                    <div class="d-flex flex-column align-items-center align-items-lg-start">
+                        <div>
+                            <i class="bi bi-gear-fill me-2" style="color: var(--ead-blue);"></i>
+                            <h6 class="d-inline">EAD <span>Oleohidráulica</span></h6>
+                        </div>
+                        <small class="text-muted">© 2025 ENZO A. DEUX</small>
+                        <small class="text-muted">Sistema de Gestión v1.0</small>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="footer-logos-label">
+                        <i class="bi bi-diagram-3"></i>
+                        Nuestros proveedores
+                    </div>
+                    {% set proveedor_logos = footer_logos if footer_logos is defined else [
+                        {'nombre': 'Proveedor Estratégico', 'archivo': 'img/EAD (snf) apaisado.png'},
+                        {'nombre': 'Proveedor Premium', 'archivo': 'img/EAD negro (snf) apaisado.png'},
+                        {'nombre': 'Proveedor Asociado', 'archivo': 'img/EAD (snf).png'}
+                    ] %}
+                    <div class="footer-logos-grid">
+                        {% for proveedor in proveedor_logos %}
+                            <div class="footer-logo-slot">
+                                <img src="{{ url_for('static', filename=proveedor.archivo) }}" alt="{{ proveedor.nombre }}" loading="lazy">
+                            </div>
+                        {% else %}
+                            <div class="footer-logo-slot placeholder">
+                                Espacio disponible
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
-            <small class="text-muted">ENZO A. DEUX | Sistema de Gestión v1.0</small>
         </div>
     </footer>
     
