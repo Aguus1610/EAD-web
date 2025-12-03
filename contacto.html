@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto | EAD Oleohidraulica</title>
+  <meta name="description" content="Contacto directo con especialistas en grúas articuladas e hidroelevadores. Servicio 24/7 para empresas de servicios públicos." />
+  <link rel="icon" href="Logo simple Taller (snf blanco).png" type="image/png" />
+  <link rel="apple-touch-icon" href="Logo simple Taller (snf blanco).png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="contact.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- Google Maps API - Reemplazar TU_API_KEY con tu clave real (ver CONFIGURACION_GOOGLE_MAPS.md) -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&callback=initMap&libraries=places"></script>
+</head>
+<body>
+  <div class="nav-overlay"></div>
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <div class="logo-container">
+          <img src="Logo simple Taller (snf blanco).png" alt="EAD Oleohidráulica - Soluciones hidráulicas profesionales" class="logo-img" loading="eager" />
+        </div>
+      </a>
+      
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="site-nav" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="productos.html">Productos</a></li>
+          <li><a href="servicios.html">Servicios</a></li>
+          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="contacto.html" class="active">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero">
+    <div class="container">
+      <h1>¿Problemas con tu grúa o hidroelevador?</h1>
+      <p>Email • WhatsApp • Telefono • Instagram • Visitanos en el taller</p>
+    </div>
+  </section>
+
+  <main class="container section">
+    <div class="contact-container">
+      <div class="contact-form">
+        <h2 style="color: var(--clr-primary-700); margin-bottom: 1.5rem;">Contanos qué necesitás</h2>
+        <form id="contact-form">
+          <div class="form-group">
+            <label for="name">Nombre completo *</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Correo electrónico *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Teléfono</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+          
+          <div class="form-group">
+            <label for="subject">Asunto</label>
+            <select id="subject" name="subject">
+              <option value="">¿De qué se trata?</option>
+              <option value="repuesto">Necesito un repuesto para grúa</option>
+              <option value="reparacion">Reparación de grúa/hidroelevador</option>
+              <option value="mantenimiento">Plan de mantenimiento</option>
+              <option value="emergencia">¡URGENTE! Grúa fuera de servicio</option>
+              <option value="certificacion">Certificación/Inspección</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label for="message">Mensaje *</label>
+            <textarea id="message" name="message" required placeholder="Indicá: Marca y modelo de la grúa, problema que presenta, ubicación del equipo"></textarea>
+          </div>
+          
+          <button type="submit" class="btn btn--primary" style="width: 100%;">Enviar mensaje</button>
+        </form>
+      </div>
+      
+      <div class="contact-info">
+        <h2 style="color: var(--clr-primary-700); margin-bottom: 1.5rem;">Información de contacto</h2>
+        
+        <div class="info-item">
+          <h3>
+            <span class="icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#4CAF50" style="vertical-align: middle;">
+                <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+              </svg>
+            </span> 
+            Teléfono
+          </h3>
+          <p>
+            Enzo A. Deux: <a href="tel:+542302592703">+54 2302 592703</a> | 
+            <a href="https://wa.me/542302592703" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600;">WhatsApp</a><br>
+            Agustin Deux: <a href="tel:+542302672827">+54 2302 672827</a> | 
+            <a href="https://wa.me/542302672827" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600;">WhatsApp</a>
+          </p>
+        </div>
+        
+        <div class="info-item">
+          <h3>
+            <span class="icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#EA4335" style="vertical-align: middle;">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </span> 
+            Email
+          </h3>
+          <p>
+            Enzo A. Deux: <a href="mailto:hydropampa@hotmail.com">hydropampa@hotmail.com</a><br>
+            Agustin Deux: <a href="mailto:adm201364@gmail.com">adm201364@gmail.com</a><br>
+          </p>
+        </div>
+        
+        <div class="info-item">
+          <h3>
+            <span class="icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#25D366" style="vertical-align: middle;">
+                <defs>
+                  <linearGradient id="whatsapp-gradient" x1="85.915" y1="32.567" x2="85.915" y2="137.092">
+                    <stop offset="0" stop-color="#57d163"/>
+                    <stop offset="1" stop-color="#23b33a"/>
+                  </linearGradient>
+                </defs>
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.051 3.488"/>
+              </svg>
+            </span> 
+            WhatsApp - Contacto directo
+          </h3>
+          <p>
+            Escribinos directamente por WhatsApp para consultas urgentes:<br>
+            <a href="https://wa.me/542302592703?text=Hola%2C%20necesito%20información%20sobre%20servicios%20oleohidráulicos" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600;">💬 Enzo A. Deux</a> | 
+            <a href="https://wa.me/542302672827?text=Hola%2C%20necesito%20información%20sobre%20servicios%20oleohidráulicos" target="_blank" rel="noopener noreferrer" style="color: #25D366; font-weight: 600;">💬 Agustin Deux</a>
+          </p>
+        </div>
+
+        <div class="info-item">
+          <h3>
+            <span class="icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="url(#instagram-gradient)" style="vertical-align: middle;">
+                <defs>
+                  <linearGradient id="instagram-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#833ab4;stop-opacity:1" />
+                    <stop offset="50%" style="stop-color:#fd1d1d;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#fcb045;stop-opacity:1" />
+                  </linearGradient>
+                </defs>
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </span> 
+            Instagram
+          </h3>
+          <p>
+            Seguinos en Instagram para ver nuestros trabajos y novedades:<br>
+            <a href="https://instagram.com/ead_oleohidraulica" target="_blank" rel="noopener noreferrer" style="color: #833ab4; font-weight: 600;">@ead_oleohidraulica</a>
+          </p>
+        </div>
+        
+        <div class="info-item">
+          <h3>
+            <span class="icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#FF5722" style="vertical-align: middle;">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+            </span> 
+            Visitanos en el taller
+          </h3>
+          <p>
+            España 245<br>
+            Colonia Baron (6315) - La Pampa - Argentina<br>
+            <a href="https://www.google.com/maps/place/Oleohidraulica+EAD+(Hydro-Pampa)/@-36.1523001,-63.8570343,16z/data=!4m6!3m5!1s0x95c311d5bf08af8f:0x18bb540d73606fe4!8m2!3d-36.1515528!4d-63.8516893!16s%2Fg%2F11spf1cm0g?entry=ttu&g_ep=EgoyMDI1MDczMC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" style="color: #1976D2; font-weight: 600;">Ver en Google Maps</a>
+          </p>
+        </div>
+        
+        <div class="info-item">
+          <h3>
+            <span class="icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#FF9800" style="vertical-align: middle;">
+                <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+                <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+              </svg>
+            </span> 
+            Horario de atención
+          </h3>
+          <p>
+            Lunes a Viernes: 8:00 a 12:00 hs y 15:00 a 19:00 hs<br>
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Sección de Mapa Interactivo -->
+  <section class="map-section">
+    <div class="container">
+      <h2 style="text-align: center; color: var(--clr-primary-700); margin-bottom: var(--spacing-md);">Ubicación del Taller</h2>
+      <p style="text-align: center; color: var(--clr-neutral-600); margin-bottom: var(--spacing-xl);">
+        España 245, Colonia Baron (6315) - La Pampa - Argentina
+      </p>
+      <div id="google-map" class="google-map-container"></div>
+      <div class="map-actions" style="margin-top: var(--spacing-lg); text-align: center;">
+        <a href="https://www.google.com/maps/place/Oleohidraulica+EAD+(Hydro-Pampa)/@-36.1515528,-63.8516893,16z/data=!4m6!3m5!1s0x95c311d5bf08af8f:0x18bb540d73606fe4!8m2!3d-36.1515528!4d-63.8516893!16s%2Fg%2F11spf1cm0g?entry=ttu&g_ep=EgoyMDI1MDczMC4wIKXMDSoASAFQAw%3D%3D" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="btn btn--primary"
+           style="display: inline-flex; align-items: center; gap: var(--spacing-sm);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          Abrir en Google Maps
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de Empresas Representadas -->
+  <section class="partners-section">
+    <div class="container">
+      <h2>Empresas que representamos</h2>
+      <p>Servicio Técnico Oficial y venta de repuestos originales</p>
+      
+
+      <div class="partners-grid">
+        <a href="https://www.palfinger.com/es-ar">
+          <div class="partner-item">
+            <div class="partner-logo">
+              <img src="palf-sinfondo.png" alt="Palfinger - Servicio Técnico Oficial" loading="lazy" />
+            </div>
+            <h3>Palfinger</h3>
+            <p>Servicio Técnico Oficial<br>Repuestos originales</p>
+          </div>
+        </a>
+        
+        <a href="https://www.palfinger.com/es-ar">
+          <div class="partner-item">
+            <div class="partner-logo">
+              <img src="20250212_125825_0000 - Editado_20250212_141914_0000.png" alt="Hidro-Grubert - Servicio Técnico Oficial" loading="lazy" />
+            </div>
+            <h3>Hidro-Grubert</h3>
+            <p>Servicio Técnico Oficial<br>Repuestos originales</p>
+          </div>
+        </a>
+        
+        <a href="https://www.hidraulicamovil.com.ar/">
+          <div class="partner-item">
+            <div class="partner-logo">
+              <img src="HIDRAULICA MOVIL Hidroelevadores y grúas (1).png" alt="Hidráulica Móvil/ING - Distribuidores autorizados" loading="lazy" />
+            </div>
+            <h3>Hidráulica Móvil/ING</h3>
+            <p>Distribuidores autorizados<br>Repuestos y accesorios</p>
+          </div>
+        </a>
+      </div>
+      
+      <div class="partners-guarantee">
+        <p><strong>✓ Garantía de fábrica</strong> • <strong>✓ Soporte técnico directo</strong> • <strong>✓ Repuestos originales</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>&copy; <span id="year"></span> EAD Oleohidraulica — Todos los derechos reservados.</p>
+      <p class="developer-credit">Desarrollado por <span class="developer-name">ADM Digital</span> | Agustin Deux Messler</p>
+    </div>
+  </footer>
+
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function(){
+      emailjs.init('SHCCKv__9-9XVNQDv'); // ✅ Public Key configurado
+    })();
+  </script>
+  
+  <!-- ===== Botón Flotante WhatsApp ===== -->
+  <a href="https://wa.me/542302672827?text=Hola%2C%20necesito%20ayuda%20urgente%20con%20mi%20grúa" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     class="whatsapp-float"
+     aria-label="Contactar por WhatsApp - Urgencias">
+    <div class="whatsapp-float-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.051 3.488"/>
+      </svg>
+    </div>
+    <span class="whatsapp-float-text">¿Urgencia?<br>Escribinos</span>
+  </a>
+
+  <!-- ===== Formulario de Contacto Rápido (Sidebar) ===== -->
+  <div class="quick-contact-sidebar" id="quickContactSidebar">
+    <div class="quick-contact-overlay"></div>
+    <div class="quick-contact-panel">
+      <button class="quick-contact-close" aria-label="Cerrar formulario">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <h2>Contacto Rápido</h2>
+      <p class="quick-contact-subtitle">Completá el formulario y te responderemos al instante</p>
+      <form id="quick-contact-form" class="quick-contact-form">
+        <div class="form-group">
+          <label for="quick-name">Nombre *</label>
+          <input type="text" id="quick-name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="quick-phone">Teléfono *</label>
+          <input type="tel" id="quick-phone" name="phone" required>
+        </div>
+        <div class="form-group">
+          <label for="quick-message">Mensaje breve *</label>
+          <textarea id="quick-message" name="message" rows="4" required placeholder="Ej: Necesito reparación urgente de grúa Palfinger"></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary" style="width: 100%;">
+          Enviar por WhatsApp →
+        </button>
+      </form>
+      <div class="quick-contact-alternative">
+        <p>O contactanos directamente:</p>
+        <a href="tel:+542302672827" class="quick-contact-link">
+          📞 Llamar ahora: +54 2302 672827
+        </a>
+        <a href="https://wa.me/542302672827" target="_blank" class="quick-contact-link">
+          💬 WhatsApp directo
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Botón para abrir formulario rápido ===== -->
+  <button class="quick-contact-trigger" aria-label="Abrir formulario de contacto rápido">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+    <span>Contacto rápido</span>
+  </button>
+
+  <script src="main.js" defer></script>
+  <script src="contact.js" defer></script>
+  <script>
+    // Inicializar mapa de Google Maps
+    function initMap() {
+      // Coordenadas del taller: España 245, Colonia Baron, La Pampa
+      const tallerLocation = { lat: -36.1515528, lng: -63.8516893 };
+      
+      // Crear mapa centrado en la ubicación del taller
+      const map = new google.maps.Map(document.getElementById('google-map'), {
+        zoom: 16,
+        center: tallerLocation,
+        mapTypeId: 'roadmap',
+        styles: [
+          {
+            featureType: 'poi',
+            elementType: 'labels',
+            stylers: [{ visibility: 'on' }]
+          }
+        ],
+        disableDefaultUI: false,
+        zoomControl: true,
+        mapTypeControl: false,
+        scaleControl: true,
+        streetViewControl: true,
+        rotateControl: false,
+        fullscreenControl: true
+      });
+      
+      // Crear marcador personalizado
+      const marker = new google.maps.Marker({
+        position: tallerLocation,
+        map: map,
+        title: 'EAD Oleohidráulica - Taller',
+        animation: google.maps.Animation.DROP,
+        icon: {
+          url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+            <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="20" fill="#FFAA00" stroke="#001122" stroke-width="2"/>
+              <circle cx="24" cy="24" r="8" fill="#001122"/>
+              <path d="M24 4 L24 12 M24 36 L24 44 M4 24 L12 24 M36 24 L44 24" stroke="#001122" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          `),
+          scaledSize: new google.maps.Size(48, 48),
+          anchor: new google.maps.Point(24, 48)
+        }
+      });
+      
+      // Crear ventana de información
+      const infoWindow = new google.maps.InfoWindow({
+        content: `
+          <div style="padding: 12px; max-width: 250px;">
+            <h3 style="margin: 0 0 8px 0; color: #001122; font-size: 18px; font-weight: 700;">EAD Oleohidráulica</h3>
+            <p style="margin: 0 0 8px 0; color: #4B5563; font-size: 14px; line-height: 1.5;">
+              España 245<br>
+              Colonia Baron (6315)<br>
+              La Pampa - Argentina
+            </p>
+            <a href="https://www.google.com/maps/place/Oleohidraulica+EAD+(Hydro-Pampa)/@-36.1515528,-63.8516893,16z" 
+               target="_blank" 
+               style="color: #FFAA00; font-weight: 600; text-decoration: none; font-size: 14px;">
+              Ver en Google Maps →
+            </a>
+          </div>
+        `
+      });
+      
+      // Mostrar ventana de información al hacer click en el marcador
+      marker.addListener('click', () => {
+        infoWindow.open(map, marker);
+      });
+      
+      // Mostrar ventana de información automáticamente al cargar
+      infoWindow.open(map, marker);
+    }
+    
+    // Manejar errores de carga del mapa
+    window.gm_authFailure = function() {
+      const mapContainer = document.getElementById('google-map');
+      if (mapContainer) {
+        // Fallback a iframe embed si la API falla
+        mapContainer.innerHTML = `
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.5!2d-63.8516893!3d-36.1515528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95c311d5bf08af8f%3A0x18bb540d73606fe4!2sOleohidraulica%20EAD%20(Hydro-Pampa)!5e0!3m2!1ses!2sar!4v1700000000000!5m2!1ses!2sar" 
+            width="100%" 
+            height="100%" 
+            style="border:0; border-radius: 1rem;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Ubicación de EAD Oleohidráulica">
+          </iframe>
+        `;
+      }
+    };
+    
+    // Timeout de seguridad: si el mapa no carga en 10 segundos, usar fallback
+    setTimeout(() => {
+      const mapContainer = document.getElementById('google-map');
+      if (mapContainer && !mapContainer.querySelector('.gm-style')) {
+        // El mapa no se cargó, usar fallback
+        mapContainer.innerHTML = `
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.5!2d-63.8516893!3d-36.1515528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95c311d5bf08af8f%3A0x18bb540d73606fe4!2sOleohidraulica%20EAD%20(Hydro-Pampa)!5e0!3m2!1ses!2sar!4v1700000000000!5m2!1ses!2sar" 
+            width="100%" 
+            height="100%" 
+            style="border:0; border-radius: 1rem;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Ubicación de EAD Oleohidráulica">
+          </iframe>
+        `;
+      }
+    }, 10000);
+  </script>
+</body>
+</html>
