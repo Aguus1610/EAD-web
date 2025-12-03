@@ -12,6 +12,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- Google Maps API - Reemplazar TU_API_KEY con tu clave real (ver CONFIGURACION_GOOGLE_MAPS.md) -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY&callback=initMap&libraries=places"></script>
 </head>
 <body>
   <div class="nav-overlay"></div>
@@ -200,6 +202,30 @@
     </div>
   </main>
 
+  <!-- Sección de Mapa Interactivo -->
+  <section class="map-section">
+    <div class="container">
+      <h2 style="text-align: center; color: var(--clr-primary-700); margin-bottom: var(--spacing-md);">Ubicación del Taller</h2>
+      <p style="text-align: center; color: var(--clr-neutral-600); margin-bottom: var(--spacing-xl);">
+        España 245, Colonia Baron (6315) - La Pampa - Argentina
+      </p>
+      <div id="google-map" class="google-map-container"></div>
+      <div class="map-actions" style="margin-top: var(--spacing-lg); text-align: center;">
+        <a href="https://www.google.com/maps/place/Oleohidraulica+EAD+(Hydro-Pampa)/@-36.1515528,-63.8516893,16z/data=!4m6!3m5!1s0x95c311d5bf08af8f:0x18bb540d73606fe4!8m2!3d-36.1515528!4d-63.8516893!16s%2Fg%2F11spf1cm0g?entry=ttu&g_ep=EgoyMDI1MDczMC4wIKXMDSoASAFQAw%3D%3D" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="btn btn--primary"
+           style="display: inline-flex; align-items: center; gap: var(--spacing-sm);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          Abrir en Google Maps
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- Sección de Empresas Representadas -->
   <section class="partners-section">
     <div class="container">
@@ -325,5 +351,119 @@
 
   <script src="main.js" defer></script>
   <script src="contact.js" defer></script>
+  <script>
+    // Inicializar mapa de Google Maps
+    function initMap() {
+      // Coordenadas del taller: España 245, Colonia Baron, La Pampa
+      const tallerLocation = { lat: -36.1515528, lng: -63.8516893 };
+      
+      // Crear mapa centrado en la ubicación del taller
+      const map = new google.maps.Map(document.getElementById('google-map'), {
+        zoom: 16,
+        center: tallerLocation,
+        mapTypeId: 'roadmap',
+        styles: [
+          {
+            featureType: 'poi',
+            elementType: 'labels',
+            stylers: [{ visibility: 'on' }]
+          }
+        ],
+        disableDefaultUI: false,
+        zoomControl: true,
+        mapTypeControl: false,
+        scaleControl: true,
+        streetViewControl: true,
+        rotateControl: false,
+        fullscreenControl: true
+      });
+      
+      // Crear marcador personalizado
+      const marker = new google.maps.Marker({
+        position: tallerLocation,
+        map: map,
+        title: 'EAD Oleohidráulica - Taller',
+        animation: google.maps.Animation.DROP,
+        icon: {
+          url: 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+            <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="20" fill="#FFAA00" stroke="#001122" stroke-width="2"/>
+              <circle cx="24" cy="24" r="8" fill="#001122"/>
+              <path d="M24 4 L24 12 M24 36 L24 44 M4 24 L12 24 M36 24 L44 24" stroke="#001122" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          `),
+          scaledSize: new google.maps.Size(48, 48),
+          anchor: new google.maps.Point(24, 48)
+        }
+      });
+      
+      // Crear ventana de información
+      const infoWindow = new google.maps.InfoWindow({
+        content: `
+          <div style="padding: 12px; max-width: 250px;">
+            <h3 style="margin: 0 0 8px 0; color: #001122; font-size: 18px; font-weight: 700;">EAD Oleohidráulica</h3>
+            <p style="margin: 0 0 8px 0; color: #4B5563; font-size: 14px; line-height: 1.5;">
+              España 245<br>
+              Colonia Baron (6315)<br>
+              La Pampa - Argentina
+            </p>
+            <a href="https://www.google.com/maps/place/Oleohidraulica+EAD+(Hydro-Pampa)/@-36.1515528,-63.8516893,16z" 
+               target="_blank" 
+               style="color: #FFAA00; font-weight: 600; text-decoration: none; font-size: 14px;">
+              Ver en Google Maps →
+            </a>
+          </div>
+        `
+      });
+      
+      // Mostrar ventana de información al hacer click en el marcador
+      marker.addListener('click', () => {
+        infoWindow.open(map, marker);
+      });
+      
+      // Mostrar ventana de información automáticamente al cargar
+      infoWindow.open(map, marker);
+    }
+    
+    // Manejar errores de carga del mapa
+    window.gm_authFailure = function() {
+      const mapContainer = document.getElementById('google-map');
+      if (mapContainer) {
+        // Fallback a iframe embed si la API falla
+        mapContainer.innerHTML = `
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.5!2d-63.8516893!3d-36.1515528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95c311d5bf08af8f%3A0x18bb540d73606fe4!2sOleohidraulica%20EAD%20(Hydro-Pampa)!5e0!3m2!1ses!2sar!4v1700000000000!5m2!1ses!2sar" 
+            width="100%" 
+            height="100%" 
+            style="border:0; border-radius: 1rem;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Ubicación de EAD Oleohidráulica">
+          </iframe>
+        `;
+      }
+    };
+    
+    // Timeout de seguridad: si el mapa no carga en 10 segundos, usar fallback
+    setTimeout(() => {
+      const mapContainer = document.getElementById('google-map');
+      if (mapContainer && !mapContainer.querySelector('.gm-style')) {
+        // El mapa no se cargó, usar fallback
+        mapContainer.innerHTML = `
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3284.5!2d-63.8516893!3d-36.1515528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95c311d5bf08af8f%3A0x18bb540d73606fe4!2sOleohidraulica%20EAD%20(Hydro-Pampa)!5e0!3m2!1ses!2sar!4v1700000000000!5m2!1ses!2sar" 
+            width="100%" 
+            height="100%" 
+            style="border:0; border-radius: 1rem;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Ubicación de EAD Oleohidráulica">
+          </iframe>
+        `;
+      }
+    }, 10000);
+  </script>
 </body>
 </html>
