@@ -1,0 +1,135 @@
+/* ===== Instagram Feed Integration ===== */
+/* Opción 1: Usar Instagram Basic Display API */
+/* Opción 2: Usar servicio externo como EmbedSocial, Elfsight, etc. */
+
+class InstagramFeed {
+  constructor(options = {}) {
+    this.username = options.username || 'oleohidraulica_ead';
+    this.accessToken = options.accessToken || null;
+    this.limit = options.limit || 8; // Necesitamos obtener más para seleccionar las específicas
+    this.selectedPosts = options.selectedPosts || [1, 3, 4, 7]; // Índices 0-based: 2, 4, 5, 8 (restamos 1)
+    this.container = options.container || '.social-feed';
+    this.useAPI = options.useAPI || false;
+  }
+
+  /* Método 1: Instagram Basic Display API */
+  async fetchFromAPI() {
+    if (!this.accessToken) {
+      console.warn('Instagram API: Access token no configurado');
+      return this.fallbackFeed();
+    }
+
+    try {
+      const response = await fetch(
+        `https://graph.instagram.com/me/media?fields=id,caption,media_type,media_url,permalink,thumbnail_url,timestamp&access_token=${this.accessToken}&limit=${this.limit}`
+      );
+      
+      if (!response.ok) {
+        throw new Error('Error al obtener datos de Instagram');
+      }
+
+      const data = await response.json();
+      // Filtrar para obtener solo las publicaciones seleccionadas (2, 4, 5, 8)
+      // Los índices en el array son 0-based, así que restamos 1: 2->1, 4->3, 5->4, 8->7
+      const selectedData = this.selectedPosts
+        .map(index => data.data[index])
+        .filter(post => post !== undefined); // Filtrar undefined si alguna publicación no existe
+      return this.renderFeed(selectedData);
+    } catch (error) {
+      console.error('Error fetching Instagram:', error);
+      return this.fallbackFeed();
+    }
+  }
+
+  /* Método 2: Usar servicio externo (EmbedSocial, Elfsight, SnapWidget) */
+  loadEmbedSocial() {
+    // Ejemplo con EmbedSocial (requiere cuenta y widget ID)
+    const widgetId = 'TU_WIDGET_ID'; // Reemplazar con tu widget ID
+    const script = document.createElement('script');
+    script.src = `https://embedsocial.com/embedscript/ig.js`;
+    script.setAttribute('data-widget-id', widgetId);
+    document.head.appendChild(script);
+  }
+
+  loadElfsight() {
+    // Ejemplo con Elfsight (requiere cuenta y app ID)
+    const appId = 'TU_APP_ID'; // Reemplazar con tu app ID
+    const script = document.createElement('script');
+    script.src = `https://apps.elfsight.com/p/platform.js`;
+    script.defer = true;
+    script.setAttribute('data-elfsight-app-id', appId);
+    document.head.appendChild(script);
+  }
+
+  /* Método 3: Fallback - Mostrar imágenes estáticas */
+  fallbackFeed() {
+    console.log('Usando feed estático de Instagram');
+    // El HTML ya tiene las imágenes estáticas, no hacer nada
+    return null;
+  }
+
+  /* Renderizar feed desde API */
+  renderFeed(posts) {
+    const container = document.querySelector(this.container);
+    if (!container) return;
+
+    container.innerHTML = posts.map(post => `
+      <div class="social-feed-item">
+        <a href="${post.permalink}" target="_blank" rel="noopener noreferrer" class="social-card">
+          <div class="social-card-image">
+            <img 
+              src="${post.media_type === 'VIDEO' ? post.thumbnail_url : post.media_url}" 
+              alt="${post.caption ? post.caption.substring(0, 100) : 'Instagram post'}" 
+              loading="lazy" />
+            <div class="social-card-overlay">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="social-card-content">
+            <p>Ver en Instagram</p>
+          </div>
+        </a>
+      </div>
+    `).join('');
+
+    // Re-animar los nuevos elementos
+    const items = container.querySelectorAll('.social-feed-item');
+    items.forEach((item, index) => {
+      item.style.animationDelay = `${0.1 * (index + 1)}s`;
+      item.classList.add('fade-in');
+    });
+  }
+
+  /* Inicializar */
+  init() {
+    if (this.useAPI && this.accessToken) {
+      this.fetchFromAPI();
+    } else if (this.useAPI && !this.accessToken) {
+      console.warn('Instagram API: Configura accessToken para usar la API');
+      this.fallbackFeed();
+    } else {
+      // Usar feed estático (ya implementado en HTML)
+      this.fallbackFeed();
+    }
+  }
+}
+
+// Inicializar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+  // Configuración: Cambiar useAPI a true y agregar accessToken para usar API real
+  const instagramFeed = new InstagramFeed({
+    username: 'oleohidraulica_ead',
+    accessToken: null, // Agregar tu access token aquí
+    limit: 8, // Obtenemos 8 para poder seleccionar las 4 específicas
+    selectedPosts: [1, 3, 4, 7], // Publicaciones 2, 4, 5, 8 (índices 0-based)
+    container: '.social-feed',
+    useAPI: false // Cambiar a true cuando tengas el access token
+  });
+
+  // Descomentar para usar servicio externo:
+  // instagramFeed.loadEmbedSocial();
+  // instagramFeed.loadElfsight();
+});
+

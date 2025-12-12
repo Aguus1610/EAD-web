@@ -1,0 +1,11 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+[remote "origin"]
+	url = https://github.com/Aguus1610/EAD-web.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "web-12-12-2025"]
+	remote = origin
+	merge = refs/heads/web-12-12-2025
+
