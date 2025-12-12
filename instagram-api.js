@@ -4,9 +4,10 @@
 
 class InstagramFeed {
   constructor(options = {}) {
-    this.username = options.username || 'ead_oleohidraulica';
+    this.username = options.username || 'oleohidraulica_ead';
     this.accessToken = options.accessToken || null;
-    this.limit = options.limit || 4;
+    this.limit = options.limit || 8; // Necesitamos obtener más para seleccionar las específicas
+    this.selectedPosts = options.selectedPosts || [1, 3, 4, 7]; // Índices 0-based: 2, 4, 5, 8 (restamos 1)
     this.container = options.container || '.social-feed';
     this.useAPI = options.useAPI || false;
   }
@@ -28,7 +29,12 @@ class InstagramFeed {
       }
 
       const data = await response.json();
-      return this.renderFeed(data.data);
+      // Filtrar para obtener solo las publicaciones seleccionadas (2, 4, 5, 8)
+      // Los índices en el array son 0-based, así que restamos 1: 2->1, 4->3, 5->4, 8->7
+      const selectedData = this.selectedPosts
+        .map(index => data.data[index])
+        .filter(post => post !== undefined); // Filtrar undefined si alguna publicación no existe
+      return this.renderFeed(selectedData);
     } catch (error) {
       console.error('Error fetching Instagram:', error);
       return this.fallbackFeed();
@@ -114,9 +120,10 @@ class InstagramFeed {
 document.addEventListener('DOMContentLoaded', () => {
   // Configuración: Cambiar useAPI a true y agregar accessToken para usar API real
   const instagramFeed = new InstagramFeed({
-    username: 'ead_oleohidraulica',
+    username: 'oleohidraulica_ead',
     accessToken: null, // Agregar tu access token aquí
-    limit: 4,
+    limit: 8, // Obtenemos 8 para poder seleccionar las 4 específicas
+    selectedPosts: [1, 3, 4, 7], // Publicaciones 2, 4, 5, 8 (índices 0-based)
     container: '.social-feed',
     useAPI: false // Cambiar a true cuando tengas el access token
   });

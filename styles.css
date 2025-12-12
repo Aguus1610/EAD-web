@@ -695,6 +695,22 @@ p {
   font-size: var(--font-size-base);
 }
 
+/* Botones dentro de las tarjetas feature - Estilos corregidos */
+.feature .btn--secondary {
+  background: transparent;
+  color: var(--clr-primary-700);
+  border: 2px solid var(--clr-primary-400);
+  margin-top: var(--spacing-md);
+}
+
+.feature .btn--secondary:hover {
+  background: linear-gradient(135deg, var(--clr-primary-700) 0%, var(--clr-primary-600) 100%);
+  color: var(--clr-neutral-100);
+  border-color: var(--clr-primary-700);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 34, 68, 0.2);
+}
+
 /* ===== Page Hero (Páginas internas) Premium ===== */
 .page-hero {
   background: linear-gradient(160deg, var(--clr-primary-900) 0%, var(--clr-primary-600) 100%);
@@ -1563,6 +1579,51 @@ p {
 .social-section {
   padding: var(--spacing-4xl) 0;
   background: linear-gradient(180deg, var(--clr-neutral-50) 0%, var(--clr-neutral-100) 100%);
+}
+
+/* Botón de Instagram dentro de social-section - Estilos corregidos */
+.social-section-cta {
+  text-align: center;
+  margin-top: var(--spacing-xl);
+}
+
+.social-section .btn--secondary {
+  background: transparent;
+  color: var(--clr-primary-700);
+  border: 2px solid var(--clr-primary-400);
+}
+
+.social-section .btn--secondary:hover {
+  background: linear-gradient(135deg, var(--clr-primary-700) 0%, var(--clr-primary-600) 100%);
+  color: var(--clr-neutral-100);
+  border-color: var(--clr-primary-700);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 34, 68, 0.2);
+}
+
+.social-section .btn--secondary svg {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+/* Botón de blog section - Estilos corregidos */
+.blog-section-cta {
+  text-align: center;
+  margin-top: var(--spacing-2xl);
+}
+
+.blog-section .btn--secondary {
+  background: transparent;
+  color: var(--clr-primary-700);
+  border: 2px solid var(--clr-primary-400);
+}
+
+.blog-section .btn--secondary:hover {
+  background: linear-gradient(135deg, var(--clr-primary-700) 0%, var(--clr-primary-600) 100%);
+  color: var(--clr-neutral-100);
+  border-color: var(--clr-primary-700);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 34, 68, 0.2);
 }
 
 .social-feed {
