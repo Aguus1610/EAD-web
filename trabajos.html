@@ -445,6 +445,55 @@
     <span class="whatsapp-float-text">¿Urgencia?<br>Escribinos</span>
   </a>
 
+  <!-- ===== Formulario de Contacto Rápido (Sidebar) ===== -->
+  <div class="quick-contact-sidebar" id="quickContactSidebar">
+    <div class="quick-contact-overlay"></div>
+    <div class="quick-contact-panel">
+      <button class="quick-contact-close" aria-label="Cerrar formulario">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <h2>Contacto Rápido</h2>
+      <p class="quick-contact-subtitle">Completá el formulario y te responderemos al instante</p>
+      <form id="quick-contact-form" class="quick-contact-form">
+        <div class="form-group">
+          <label for="quick-name">Nombre *</label>
+          <input type="text" id="quick-name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="quick-phone">Teléfono *</label>
+          <input type="tel" id="quick-phone" name="phone" required>
+        </div>
+        <div class="form-group">
+          <label for="quick-message">Mensaje breve *</label>
+          <textarea id="quick-message" name="message" rows="4" required placeholder="Ej: Necesito reparación urgente de grúa Palfinger"></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary" style="width: 100%;">
+          Enviar por WhatsApp →
+        </button>
+      </form>
+      <div class="quick-contact-alternative">
+        <p>O contactanos directamente:</p>
+        <a href="tel:+542302672827" class="quick-contact-link">
+          📞 Llamar ahora: +54 2302 672827
+        </a>
+        <a href="https://wa.me/542302672827" target="_blank" class="quick-contact-link">
+          💬 WhatsApp directo
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Botón para abrir formulario rápido ===== -->
+  <button class="quick-contact-trigger" aria-label="Abrir formulario de contacto rápido">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    </svg>
+    <span>Contacto rápido</span>
+  </button>
+
   <script src="main.js" defer></script>
   <script src="instagram-api.js" defer></script>
 </body>
