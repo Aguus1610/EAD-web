@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://aguus1610.github.io/EAD-web/sitemap.xml
+
+# Deshabilitar crawling de archivos de desarrollo
+Disallow: /dist/
+Disallow: /*.md$
+Disallow: /*.js$
+Disallow: /verify-pwa.js
+Disallow: /build-optimize.js
+Disallow: /instagram-api.js
+
